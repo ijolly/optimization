@@ -12,6 +12,14 @@ class Telescope:
         self.id = id
         self.xmax = self.xcoord+self.width
         self.ymax = self.ycoord+self.height
+        self.centerx = (self.xcoord+self.width)/2
+        self.centery = (self.ycoord+self.height)/2
+        self.xleft = self.centerx-(self.width/2)
+        self.xright = self.centerx+(self.width/2)
+        self.ybottom = self.centery-(self.height/2)
+        self.ytop = self.centery+(self.height/2)
+        self.new_center_x = 0
+        self.new_center_y = 0
 
     def center_point(self):
         return ((self.xcoord+self.width)/2, (self.ycoord+self.height)/2)
@@ -23,6 +31,12 @@ class Telescope:
         plt.plot([self.xcoord, self.xcoord, self.xcoord+self.width, self.xcoord+self.width, self.xcoord],
                  [self.ycoord, self.ycoord+self.height, self.ycoord+self.height, self.ycoord, self.ycoord],
                  'k', linewidth=2)
+
+    def moved_tscope(self, centerx, centery):
+        self.centerx = centerx
+        self.centery = centery
+        nid = self.id
+        return Telescope(self.xleft, self.ybottom, self.width, self.height, nid)
 
         # Correctly fill out fill_between to show coverage between telescopes
         #plt.fill_between([self.xcoord, self.ycoord+self.height],
