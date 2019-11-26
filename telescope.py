@@ -30,7 +30,7 @@ class Telescope:
 
         plt.plot([self.xcoord, self.xcoord, self.xcoord+self.width, self.xcoord+self.width, self.xcoord],
                  [self.ycoord, self.ycoord+self.height, self.ycoord+self.height, self.ycoord, self.ycoord],
-                 'k', linewidth=2)
+                 'w', linewidth=2)
 
     def moved_tscope(self, centerx, centery):
         self.centerx = centerx
