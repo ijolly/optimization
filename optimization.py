@@ -8,7 +8,7 @@ import tkinter as tk
 
 
 # Global Variables Initial Values
-iterations = 100
+iterations = 1000
 overlap_weight = 2
 distance_weight = 4
 telescope_distance_weight = 1
@@ -19,12 +19,7 @@ area = 0
 sum = 0
 distance = 0
 METHOD = "Nelder-Mead"
-guess = np.array([1, 1])
-
-# Guess here is allowing for max of 15 telescopes
-#guess = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
-#guess = np.array([5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5])
-
+guess = np.array([0, 0])
 
 # Create grid for plotting on
 x, y = np.mgrid[-5:5:.05, -5:5:.05]
@@ -48,24 +43,24 @@ def Tiling(ents):
     global distance_weight
     global guess
     sum = 0
-    guess = ([1, 1])
+    guess = ([0, 0])
     Telescopes.clear()
     accumulator.clear()
     n = int(ents[int([y[0] for y in ents].index('Number of Telescopes'))][1].get())
 
     for i in range(0, n):
-        telescopex = 5#random.randint(3, 5)
-        telescopey = 5#random.randint(3, 5)
-        height = 3#random.randint(2, 5)
-        width = 3#random.randint(2, 5)
+        telescopex = 5 #random.randint(3, 5)
+        telescopey = 5 #random.randint(3, 5)
+        height = 3 #random.randint(2, 5)
+        width = 3 #random.randint(2, 5)
         if(len(Telescopes) < n):
             Telescopes.append(Telescope(telescopex, telescopey, height, width, i))
         else:
             Telescopes.clear()
         print("Telescope", telescopex, telescopey, height, width, i)
     for i in range(0, n-1):
-        guess = np.append(guess, 1)
-        guess = np.append(guess, 1)
+        guess = np.append(guess, 0)
+        guess = np.append(guess, 0)
 
     # Define constants based on previous inputted values
     overlap_weight = float(ents[int([y[0] for y in ents].index('Overlap Weight'))][1].get())
@@ -110,9 +105,10 @@ def Tiling(ents):
     accumulated = np.array(accumulator)
     plt.plot(accumulated[:, 0], accumulated[:, 1], linewidth=2)
 
+    accum_lengt = len(accumulated) - 1
     # Dynamically printed Telescopes
     for n in range(len(Telescopes)):
-        Telescopes[n].self_plot(accumulated[iterations, n*2], accumulated[iterations, n*2+1])
+        Telescopes[n].self_plot(accumulated[accum_lengt, n*2], accumulated[accum_lengt, n*2+1])
 
     plt.show()
     # plt.text(-2, -2, "CG", fontsize=20, bbox=dict(facecolor='red',alpha=0.5))
@@ -145,12 +141,24 @@ def distance_between(x, y, a, b):
     return sqrt((x-a)**2 + (y-b)**2)
 
 
-def overlap_total(n, equation):
+def overlap_total(n, equation): # Equation = [telescope[1].x, telescope[1].y, telescope[2].x, telescope[2].y,...]
     test = 0
     for i in range(n):
         for j in range(n):
             if j > i:
                 test += overlap_weight * area_overlap_coords(equation[i*2], equation[(i*2)+1], equation[j*2], equation[(j*2)+1], Telescopes[i], Telescopes[j])
+    return test
+
+def max_overlap(n):
+    test = 0
+    for i in range(n):
+        for j in range(n):
+            if j > i:
+                test += overlap_weight * area_overlap_coords(0, 0, 0, 0, Telescopes[i], Telescopes[j])
+    return test
+
+def normalized_overlap(n, equation):
+    test = overlap_weight*overlap_total(n, equation)/max_overlap(n)
     return test
 
 
@@ -178,37 +186,18 @@ def f(equation):  # Define objective function
     global n
     global accumulator
     global guess
-    # for index in range(n):
-    #     sum += distance_weight * np.sqrt((equation[index*2])**2 + (equation[index*2+1])**2)
-    #     distance += distance_weight * np.sqrt((equation[index*2])**2 + (equation[index*2+1])**2)
-    #
-    # for i in range(n):
-    #     for j in range(n):
-    #         if j > i:
-    #             sum += overlap_weight * area_overlap_coords(equation[i*2], equation[i*2+1], equation[j*2], equation[j*2+1], Telescopes[i], Telescopes[j])
-    #             area += overlap_weight * area_overlap_coords(equation[i*2], equation[i*2+1], equation[j*2], equation[j*2+1], Telescopes[i], Telescopes[j])
 
-    area = overlap_total(n, equation)
+    print(normalized_overlap(n, equation))
+    print(max_overlap(n))
+    print(overlap_total(n, equation))
+
     distance = distance_total(n, equation)
-    sum = overlap_total(n, equation) + distance_total(n, equation) + distance_between_total(n, equation)
-    print("Sum = {}, Area = {}, Distance = {}, Equation = {}".format(sum, area, distance, equation))
+    distance_between = distance_between_total(n, equation)
+    sum = overlap_total(n, equation) + distance_total(n, equation) + distance_between_total(n, equation) # #normalized_overlap(n, equation)
+    print("Sum = {}, Area = {}, Distance = {}, Equation = {}, Distance_between = {}".format(sum, area, distance, equation, distance_between))
     accumulator.append(equation)
+    print("Accumulator list length = {}".format(len(accumulator)))
     return sum
-    # accumulator.append(equation)
-    # test = np.sqrt((equation[0]) ** 2 + (equation[1]) ** 2) + np.sqrt(equation[2] ** 2 + (equation[3] ** 2)) + \
-    #        np.sqrt(equation[4] ** 2 + (equation[5] ** 2)) + overlap_weight * area_overlap_coords(equation[0],
-    #                                                                                              equation[1],
-    #                                                                                              equation[2],
-    #                                                                                              equation[3],Telescopes[0], Telescopes[1]) + \
-    #        overlap_weight * area_overlap_coords(equation[0], equation[1], equation[4],
-    #                                             equation[5], Telescopes[0], Telescopes[2]) + overlap_weight * area_overlap_coords(equation[2],
-    #                                                                                                 equation[3],
-    #                                                                                                 equation[4],
-    #                                                                                                 equation[5], Telescopes[1], Telescopes[2]) + \
-    #         telescope_distance_weight * distance_between(equation[0], equation[1], equation[2], equation[3]) + telescope_distance_weight * \
-    #        distance_between(equation[0], equation[1], equation[4], equation[5]) + telescope_distance_weight * distance_between(equation[2], equation[3], equation[4], equation[5])
-    # return test
-
 
 # GUI functions and INPUT below
 def fetch(entries):
@@ -224,7 +213,7 @@ def makeform(root, fields):
     text.configure(text="Tiling")
     text.pack()
     text2 = tk.Label(root)
-    text2.configure(text="Algorithm Options: Nelder-Mead, CG, BFGS, others...")
+    text2.configure(text="Algorithm Options: Nelder-Mead, CG, BFGS")
     text2.pack()
     entries = []
     for field in fields:
@@ -250,8 +239,6 @@ def makeform(root, fields):
 
 root = tk.Tk()
 ents = makeform(root, fields)
-#b1 = tk.Button(root, text='Register Values', command=(lambda e=ents: fetch(e)))
-#b1.pack(side=tk.LEFT, padx=5, pady=5)
 b1 = tk.Button(root, text='Display Tiling', command=(lambda: Tiling(ents)))
 b1.pack(side=tk.LEFT, padx=5, pady=5)
 b2 = tk.Button(root, text='Quit', command=root.destroy)
