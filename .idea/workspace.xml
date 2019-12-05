@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="45974135-7e87-4d56-84d7-5ee5974f323b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/optimization.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimization.py" afterDir="false" />
+>>>>>>> e56af71e1ab459154337efee0d7637b2ab863999
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,6 +14,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
@@ -34,6 +39,10 @@
         </entry>
       </file>
     </leaf>
+=======
+  <component name="FavoritesManager">
+    <favorites_list name="tiling" />
+>>>>>>> e56af71e1ab459154337efee0d7637b2ab863999
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -42,15 +51,10 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>area_overlapping</find>
-      <find>500</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -65,27 +69,10 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+=======
+>>>>>>> e56af71e1ab459154337efee0d7637b2ab863999
   <component name="ProjectId" id="1TJaj4CVo6hpa5cDuAKOG9mg7yV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="optimization" type="b2602c69:ProjectViewProjectNode" />
-              <item name="optimization" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/telescope.py" />
@@ -112,7 +99,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Ishan Jolly\PycharmProjects\tiling\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\ishan\PycharmProjects\tiling\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -132,6 +119,16 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -143,6 +140,7 @@
       <option name="presentableId" value="Default" />
       <updated>1573180783480</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00001" summary="Currently optimizes and draws 3 separate telescopes &#10;&#10;Weights:&#10;- Distance from center&#10;- overlap&#10;- distance between telescopes&#10;&#10;Ideas:&#10;- Normalize all portions of function to have easier time with weights">
       <created>1574736847327</created>
       <option name="number" value="00001" />
@@ -183,18 +181,38 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+=======
+    <task id="LOCAL-00001" summary="laptop local changes">
+      <created>1574778468952</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574778468953</updated>
+    </task>
+    <task id="LOCAL-00002" summary="FINALLY got telescopes working, can choose any number up to 15, and have prompt window open to take in input">
+      <created>1575259619690</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575259619690</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Working Senior Design Day code. Static size 3x3 telescopes, can choose any number">
+      <created>1575383459515</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575383459515</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+>>>>>>> e56af71e1ab459154337efee0d7637b2ab863999
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -217,9 +235,16 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+<<<<<<< HEAD
     <MESSAGE value="Currently optimizes and draws 3 separate telescopes &#10;&#10;Weights:&#10;- Distance from center&#10;- overlap&#10;- distance between telescopes&#10;&#10;Ideas:&#10;- Normalize all portions of function to have easier time with weights" />
     <MESSAGE value="something" />
     <option name="LAST_COMMIT_MESSAGE" value="something" />
+=======
+    <MESSAGE value="laptop local changes" />
+    <MESSAGE value="FINALLY got telescopes working, can choose any number up to 15, and have prompt window open to take in input" />
+    <MESSAGE value="Working Senior Design Day code. Static size 3x3 telescopes, can choose any number" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working Senior Design Day code. Static size 3x3 telescopes, can choose any number" />
+>>>>>>> e56af71e1ab459154337efee0d7637b2ab863999
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -243,6 +268,7 @@
       </expression>
     </expressions>
   </component>
+<<<<<<< HEAD
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/comet.jpg">
       <provider selected="true" editor-type-id="images" />
@@ -265,4 +291,6 @@
       </provider>
     </entry>
   </component>
+=======
+>>>>>>> e56af71e1ab459154337efee0d7637b2ab863999
 </project>
