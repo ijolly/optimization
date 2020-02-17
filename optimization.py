@@ -117,7 +117,7 @@ def Tiling(ents):
     plt.axis('off')
 
     # Optimization method
-    optimize.minimize(f, guess, method=METHOD, options={'maxiter': iterations, 'verbose': 3})
+    optimize.minimize(f, guess, method=METHOD, constraints={"fun":constraint, "type":"eq"}, options={'maxiter': iterations, 'verbose': 3})
 
     accumulated = np.array(accumulator)
     plt.plot(accumulated[:, 0], accumulated[:, 1], linewidth=2)
@@ -134,6 +134,8 @@ def Tiling(ents):
     print(distance)
     return None
 
+def constraint(equation):
+    return overlap_total(n, equation)
 
 def area_overlap_coords(n1_centerx, n1_centery, n2_centerx, n2_centery, scope1, scope2):  # returns 0 if rectangles don't interact
     dx = min((scope1.width/2)+n1_centerx, (scope2.width/2)+n2_centerx) - max(n1_centerx - (scope1.width/2), n2_centerx - (scope2.width/2))
@@ -214,7 +216,7 @@ def f(equation):  # Define objective function
     area = overlap_total(n, equation)
     distance = distance_total(n, equation)
     distance_between = distance_between_total(n, equation)
-    sum = overlap_total(n, equation) + distance_total(n, equation) + distance_between_total(n, equation) # #normalized_overlap(n, equation)
+    sum = distance_total(n, equation) + distance_between_total(n, equation) # #normalized_overlap(n, equation)
     print("Sum = {}, Area = {}, Distance = {}, Distance Between = {}, Equation = {}".format(sum, area, distance, distance_between, equation))
     accumulator.append(equation)
     print("Accumulator list length = {}".format(len(accumulator)))
@@ -236,14 +238,14 @@ def makeform(root, fields):
     text = tk.Label(root)
     text.configure(text="Tiling")
     text.pack()
-    text2 = tk.Label(root)
-    text2.configure(text="Algorithm Options: Nelder-Mead, CG, BFGS, Powell")
-    text2.pack()
+    #text2 = tk.Label(root)
+    #text2.configure(text="Algorithm Options: Nelder-Mead, CG, BFGS, Powell")
+    #text2.pack()
     entries = []
 
     # Below is the choices for the Algorithm
     algovar = tk.StringVar(root)
-    algos = ('BFGS', 'CG', 'Powell', 'Nelder-Mead') # Maybe will have to change to list
+    algos = ('BFGS', 'CG', 'Powell', 'Nelder-Mead', 'SLSQP') # Maybe will have to change to list
     algovar.set('BFGS')
 
     # Below are choices for Telescope sizing
