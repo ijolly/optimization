@@ -61,14 +61,14 @@ def Tiling(ents):
         setw = 2
     elif(tkvar.get()=='Random'):
         setx, sety = (random.randint(3, 5), random.randint(3, 5))
-        seth = random.randint(2, 5)
-        setw = random.randint(2, 5)
+        setw = random.randint(2, 6)
+        seth = random.randint(round(setw/2), setw)
 
     for i in range(0, n):
         if(tkvar.get()=='Random'):
             setx, sety = (random.randint(3, 5), random.randint(3, 5))
-            seth = random.randint(2, 5)
-            setw = random.randint(2, 5)
+            setw = random.randint(2, 6)
+            seth = random.randint(round(setw/2), setw)
         telescopex = setx #random.randint(3, 5)
         telescopey = sety #random.randint(3, 5)
         height = seth #random.randint(2, 5)
@@ -130,6 +130,7 @@ def Tiling(ents):
     plt.show()
 
     plt.imshow(im, extent=[-10, 10, -10, 10])
+    
     print(area)
     print(distance)
     return None
@@ -139,7 +140,7 @@ def constraint(equation):
 
 def area_overlap_coords(n1_centerx, n1_centery, n2_centerx, n2_centery, scope1, scope2):  # returns 0 if rectangles don't interact
     dx = min((scope1.width/2)+n1_centerx, (scope2.width/2)+n2_centerx) - max(n1_centerx - (scope1.width/2), n2_centerx - (scope2.width/2))
-    dy = min((scope1.height/2)+n2_centery, (scope2.height/2)+n2_centery) - max(n1_centery - (scope1.height/2), n2_centery - (scope2.height/2))
+    dy = min((scope1.height/2)+n1_centery, (scope2.height/2)+n2_centery) - max(n1_centery - (scope1.height/2), n2_centery - (scope2.height/2))
     if (dx >= 0) and (dy >= 0):
         return dx*dy
     else:
@@ -216,7 +217,7 @@ def f(equation):  # Define objective function
     area = overlap_total(n, equation)
     distance = distance_total(n, equation)
     distance_between = distance_between_total(n, equation)
-    sum = distance_total(n, equation) + distance_between_total(n, equation) # #normalized_overlap(n, equation)
+    sum = distance_total(n, equation) + distance_between_total(n, equation) + overlap_total(n, equation) # #normalized_overlap(n, equation)
     print("Sum = {}, Area = {}, Distance = {}, Distance Between = {}, Equation = {}".format(sum, area, distance, distance_between, equation))
     accumulator.append(equation)
     print("Accumulator list length = {}".format(len(accumulator)))
@@ -246,7 +247,7 @@ def makeform(root, fields):
     # Below is the choices for the Algorithm
     algovar = tk.StringVar(root)
     algos = ('BFGS', 'CG', 'Powell', 'Nelder-Mead', 'SLSQP') # Maybe will have to change to list
-    algovar.set('BFGS')
+    algovar.set('SLSQP')
 
     # Below are choices for Telescope sizing
     tkvar = tk.StringVar(root)

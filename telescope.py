@@ -30,7 +30,9 @@ class Telescope:
 
         plt.plot([self.xcoord, self.xcoord, self.xcoord+self.width, self.xcoord+self.width, self.xcoord],
                  [self.ycoord, self.ycoord+self.height, self.ycoord+self.height, self.ycoord, self.ycoord],
-                 'w', linewidth=2)
+                 'w', linewidth=2, label="id = {} width = {} height = {}".format(self.id, self.width, self.height))
+        plt.text(self.xcoord, self.ycoord, self.id, bbox=dict(facecolor='red',alpha=0.5))
+        plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), fancybox=True, shadow=True, ncol=5)
 
     def moved_tscope(self, centerx, centery):
         self.centerx = centerx
